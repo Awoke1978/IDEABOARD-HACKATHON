@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>Records</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Guard Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Image</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.id }}</td>
+            <td>{{ record.guard_name }}</td>
+            <td>{{ record.latitude }}</td>
+            <td>{{ record.longitude }}</td>
+            <td><img src="{{ url_for('image', image_id=record.id) }}" alt="Image" width="100"></td>
+            <td>{{ record.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Last Timestamp: {{ last_timestamp }}</p>
+    <a href="{{ url_for('upload') }}">Go to Upload Page</a>
+</body>
+</html>
