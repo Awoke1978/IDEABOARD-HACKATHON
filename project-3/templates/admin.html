@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('upload') }}">Upload Photo</a>
+        <a href="{{ url_for('admin') }}">Admin Dashboard</a>
+    </nav>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <h2>Records</h2>
+        {% if records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Guard Name</th>
+                        <th>Start Timestamp</th>
+                        <th>End Timestamp</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Hours Worked</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.guard_name }}</td>
+                        <td>{{ record.start_timestamp }}</td>
+                        <td>{{ record.end_timestamp }}</td>
+                        <td>{{ record.latitude }}</td>
+                        <td>{{ record.longitude }}</td>
+                        <td>{{ record.hours_worked }}</td>
+                        <td><a href="{{ url_for('image', image_id=record.id) }}">View Image</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No records found.</p>
+        {% endif %}
+        <p>Last Timestamp: {{ last_timestamp }}</p>
+    </div>
+</body>
+</html>
